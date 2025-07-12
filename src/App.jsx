@@ -1,13 +1,13 @@
-// import { useState } from 'react';
-import ColorCard from './components/ColorCard/ColorCard';
+import { themes } from './db.js';
+import ColorThemeList from './components/ColorThemeList/ColorThemeList.jsx';
 import './App.css';
 
 function App() {
-	// const [count, setCount] = useState(0);
-
 	return (
-		<>            
-            <ColorCard />
+        <>      
+            <h1>Theme Creator</h1>
+            
+            <ColorThemeList themes={themes} />
 		</>
 	);
 }
