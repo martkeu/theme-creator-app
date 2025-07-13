@@ -1,4 +1,5 @@
 import ColorCard from '../ColorCard/ColorCard.jsx';
+import ColorCardPreview from '../ColorCardPreview/ColorCardPreview.jsx';
 import './ColorTheme.css';
 
 /*-----------------------------------------------------------------------------mk--
@@ -8,10 +9,14 @@ import './ColorTheme.css';
 */
 function ColorTheme({ theme }) {
 	return (
-		<ul>
+		<ul className={theme.isDetailsView ? "cards" : "cardsPrev"}>
 			{theme.colors.map((color) => (
 				<li key={color.value}>
-					<ColorCard color={color} />
+					{theme.isDetailsView ? (
+						<ColorCard color={color} />
+					) : (
+						<ColorCardPreview color={color} />
+					)}
 				</li>
 			))}
 		</ul>

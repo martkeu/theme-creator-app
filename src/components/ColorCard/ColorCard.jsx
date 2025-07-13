@@ -11,7 +11,7 @@ import './ColorCard.css';
 function ColorCard({ color }) {
 	return (
 		<article className="color-card">
-			<div>
+			<div className="color-card__info">
 				<p className="color-card__name">{color.name}</p>
 				<p className="color-card__role">{color.role}</p>
 				<p className="color-card__hex">{color.value}</p>
