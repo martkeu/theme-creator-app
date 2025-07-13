@@ -1,4 +1,4 @@
-import './ColorCard.css';
+import './ColorCardDetails.css';
 
 /*-----------------------------------------------------------------------------mk--
 | Color-Card
@@ -8,7 +8,7 @@ import './ColorCard.css';
 | - role
 | - hex value
 */
-function ColorCard({ color }) {
+function ColorCardDetails({ color }) {
 	return (
 		<article className="color-card">
 			<div className="color-card__info">
@@ -25,4 +25,4 @@ function ColorCard({ color }) {
 	);
 }
 
-export default ColorCard;
+export default ColorCardDetails;

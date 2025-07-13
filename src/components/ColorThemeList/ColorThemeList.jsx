@@ -1,4 +1,5 @@
 import ColorTheme from '../ColorTheme/ColorTheme.jsx';
+import DetailsButton from '../DetailsButton/DetailsButton.jsx';
 import './ColorThemeList.css';
 
 /*-----------------------------------------------------------------------------mk--
@@ -11,11 +12,14 @@ function ColorThemeList({ themes, onToggleDetailsView }) {
 		<ul>
 			{themes.map((theme) => (
 				<li key={theme.id}>
-					<h2>{theme.name}</h2>
+					<h2>
+						<div>{theme.name}</div>
 
-					<button onClick={() => onToggleDetailsView(theme.id)}>
-						{theme.isDetailsView ? 'Hide Details' : 'Show Details'}
-					</button>
+						<DetailsButton
+							theme={theme}
+							onToggleDetailsView={onToggleDetailsView}
+						/>
+					</h2>
 
 					<ColorTheme theme={theme} />
 				</li>

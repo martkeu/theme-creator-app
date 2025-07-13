@@ -1,4 +1,4 @@
-import ColorCard from '../ColorCard/ColorCard.jsx';
+import ColorCardDetails from '../ColorCardDetails/ColorCardDetails.jsx';
 import ColorCardPreview from '../ColorCardPreview/ColorCardPreview.jsx';
 import './ColorTheme.css';
 
@@ -13,7 +13,7 @@ function ColorTheme({ theme }) {
 			{theme.colors.map((color) => (
 				<li key={color.value}>
 					{theme.isDetailsView ? (
-						<ColorCard color={color} />
+						<ColorCardDetails color={color} />
 					) : (
 						<ColorCardPreview color={color} />
 					)}
