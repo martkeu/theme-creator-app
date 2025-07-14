@@ -4,18 +4,25 @@
         'name color'
         'role color'
         'hex color';
+    column-gap: 1rem;
+    max-width: 300px;
     background-color: rgb(100, 0, 0);
     border-radius: 10px;
-    width: 100%;
-    /* max-width: 300px; */
     margin: 0 auto;
 }
 
-.color-card > div:first-child {
+.color-card__info {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5em;
+}
+
+.color-card__color {
+    grid-area: color;
+    width: 150px;
+    margin-left: auto;
+    border-radius: 0 10px 10px 0;
 }
 
 .color-card__name {
@@ -30,11 +37,4 @@
 .color-card__hex {
     grid-area: hex;
     padding-bottom: 0.5em;
-}
-
-.color-card__color {
-    grid-area: color;
-    width: 150px;
-    margin-left: auto;
-    border-radius: 0 10px 10px 0;
 }
