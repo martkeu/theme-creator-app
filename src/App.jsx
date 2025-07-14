@@ -1,12 +1,16 @@
 import { initialThemes } from './db.js';
-import { useState } from 'react';
+// import { useState } from 'react';
 import ColorThemeList from './components/ColorThemeList/ColorThemeList.jsx';
 import ThemeForm from './components/ThemeForm/ThemeForm.jsx';
 import { uid } from 'uid';
+import useLocalStorageState from 'use-local-storage-state';
 import './App.css';
 
 function App() {
-	const [themes, setThemes] = useState(initialThemes);
+	// const [themes, setThemes] = useState(initialThemes);
+	const [themes, setThemes] = useLocalStorageState('themes', {
+		defaultValue: initialThemes,
+	});
 
 	function toggleDetailsView(id) {
 		setThemes(
@@ -35,9 +39,36 @@ function App() {
 	}
 
 	function handleDeleteTheme(id) {
-        // console.log('deleted:', id);
-        
-		setThemes(themes.filter(theme => theme.id !== id));
+		// console.log('deleted:', id);
+		setThemes(themes.filter((theme) => theme.id !== id));
+	}
+
+	function toggleEditForm(id) {
+		setThemes(
+			themes.map((theme) =>
+				theme.id === id ? { ...theme, isEditForm: !theme.isEditForm } : theme
+			)
+		);
+	}
+
+	function handleEditTheme(updatedTheme) {
+		console.log('edit:', updatedTheme);
+
+		setThemes(
+			themes.map((theme) =>
+				theme.id === updatedTheme.id
+					? {
+							name: updatedTheme.title,
+							colors: [
+								{ role: 'primary', value: updatedTheme.color1 },
+								{ role: 'secondary', value: updatedTheme.color2 },
+								{ role: 'surface', value: updatedTheme.color3 },
+								{ role: 'surface-on', value: updatedTheme.color4 },
+							],
+					  }
+					: theme
+			)
+		);
 	}
 
 	return (
@@ -49,7 +80,9 @@ function App() {
 			<ColorThemeList
 				themes={themes}
 				onToggleDetailsView={toggleDetailsView}
+				onToggleEditForm={toggleEditForm}
 				onDeleteTheme={handleDeleteTheme}
+				onEditTheme={handleEditTheme}
 			/>
 		</>
 	);

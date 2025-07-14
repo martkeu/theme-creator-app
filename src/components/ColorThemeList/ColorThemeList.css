@@ -7,12 +7,3 @@ h2 {
     padding: 3px 10px 3px ;
     margin: 3rem 0 1rem;
 }
-
-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #3978e5;
-    /* border: 1px solid black; */
-}
-

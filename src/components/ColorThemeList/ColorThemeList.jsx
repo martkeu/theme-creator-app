@@ -8,31 +8,39 @@ import './ColorThemeList.css';
 |----------------------------------------------------------------------------------
 | A color-theme collection as a set of color themes
 */
-function ColorThemeList({ themes, onToggleDetailsView, onDeleteTheme }) {
+function ColorThemeList({
+	themes,
+	onToggleDetailsView,
+	onDeleteTheme,
+	onToggleEditForm,
+	onEditTheme,
+}) {
 	return (
-		<>
-			<ul>
-				{themes.map((theme) => (
-					<li key={theme.id}>
-						<h2>
-							<div>{theme.name}</div>
+		<ul>
+			{themes.map((theme) => (
+				<li key={theme.id}>
+					<h2>
+						<div>{theme.name}</div>
 
-							<DetailsButton
-								theme={theme}
-								onToggleDetailsView={onToggleDetailsView}
-							/>
+						<DetailsButton
+							theme={theme}
+							onToggleDetailsView={onToggleDetailsView}
+						/>
 
-							<DeleteButton
-								theme={theme}
-								onDeleteTheme={onDeleteTheme}
-							/>
-						</h2>
+						{/* <DeleteButton theme={theme} onDeleteTheme={onDeleteTheme}>
+							X
+						</DeleteButton> */}
+					</h2>
 
-						<ColorTheme theme={theme} />
-					</li>
-				))}
-			</ul>
-		</>
+					<ColorTheme
+						theme={theme}
+						onDeleteTheme={onDeleteTheme}
+						onToggleEditForm={onToggleEditForm}
+						onEditTheme={onEditTheme}
+					/>
+				</li>
+			))}
+		</ul>
 	);
 }
 

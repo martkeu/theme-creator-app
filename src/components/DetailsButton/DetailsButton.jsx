@@ -4,7 +4,7 @@ import './DetailsButton.css';
 
 function DetailsButton({theme, onToggleDetailsView}) {
 	return (
-		<button onClick={() => onToggleDetailsView(theme.id)}>
+        <button className="details-button" onClick={() => onToggleDetailsView(theme.id)}>
 			{/* {theme.isDetailsView ? 'Hide Details' : 'Show Details'} */}
 			{theme.isDetailsView ? <IconChevronUp /> : <IconChevronDown />}
 		</button>

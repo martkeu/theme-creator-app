@@ -7,12 +7,10 @@ import './ColorCardPreview.css';
 */
 function ColorCardPreview({ color }) {
 	return (
-        <article className="color-card-prev">
-			<div
-				className="color-card__color--prev"
+			<article
+				className="color-card__preview"
 				style={{ backgroundColor: color.value }}
-			></div>
-		</article>
+			></article>
 	);
 }
 
