@@ -1,7 +1,6 @@
-import './ThemeForm.css';
-// import Button from "../Button";
+import './ThemeCreateForm.css';
 
-export default function ThemeForm({ onAddTheme }) {
+function ThemeCreateForm({ onAddTheme }) {
 	function handleSubmit(event) {
         event.preventDefault();
         
@@ -55,3 +54,5 @@ export default function ThemeForm({ onAddTheme }) {
 		</form>
 	);
 }
+
+export default ThemeCreateForm;

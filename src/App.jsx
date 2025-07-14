@@ -1,13 +1,12 @@
 import { initialThemes } from './db.js';
-// import { useState } from 'react';
-import ColorThemeList from './components/ColorThemeList/ColorThemeList.jsx';
-import ThemeForm from './components/ThemeForm/ThemeForm.jsx';
-import { uid } from 'uid';
 import useLocalStorageState from 'use-local-storage-state';
+import { uid } from 'uid';
+import ColorThemeList from './components/ColorThemeList/ColorThemeList.jsx';
+import ThemeForm from './components/ThemeCreateForm/ThemeCreateForm.jsx';
 import './App.css';
+import Header from './components/Header/Header.jsx';
 
 function App() {
-	// const [themes, setThemes] = useState(initialThemes);
 	const [themes, setThemes] = useLocalStorageState('themes', {
 		defaultValue: initialThemes,
 	});
@@ -52,8 +51,7 @@ function App() {
 	}
 
 	function handleEditTheme(updatedTheme) {
-		console.log('edit:', updatedTheme);
-
+		// console.log('edit:', updatedTheme);
 		setThemes(
 			themes.map((theme) =>
 				theme.id === updatedTheme.id
@@ -73,7 +71,7 @@ function App() {
 
 	return (
 		<>
-			<h1>Theme Creator</h1>
+			<Header />
 
 			<ThemeForm onAddTheme={handleAddTheme} />
 
