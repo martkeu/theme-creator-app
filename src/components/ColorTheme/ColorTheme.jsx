@@ -2,6 +2,7 @@ import ColorCardDetails from '../ColorCardDetails/ColorCardDetails.jsx';
 import ColorCardPreview from '../ColorCardPreview/ColorCardPreview.jsx';
 import DeleteButton from '../DeleteButton/DeleteButton.jsx';
 import EditButton from '../EditButton/EditButton.jsx';
+import TryButton from '../TryButton/TryButton.jsx';
 import ThemeEditForm from '../ThemeEditForm/ThemeEditForm.jsx';
 import './ColorTheme.css';
 
@@ -10,11 +11,15 @@ import './ColorTheme.css';
 |----------------------------------------------------------------------------------
 | A color collection as a set of color cards
 */
-function ColorTheme({ theme, onDeleteTheme, onEditTheme, onToggleEditForm }) {
+function ColorTheme({ theme, onDeleteTheme, onEditTheme, onToggleEditForm, onOpenTestPage}) {
 	return (
 		<>
 			{theme.isDetailsView ? (
-				<div className="control-buttons">
+                <div className="control-buttons">
+                    <TryButton theme={theme} onOpenTestPage={onOpenTestPage}>
+						Try
+					</TryButton>
+
 					<EditButton
 						theme={theme}
 						onEditTheme={onEditTheme}
@@ -29,7 +34,7 @@ function ColorTheme({ theme, onDeleteTheme, onEditTheme, onToggleEditForm }) {
 				</div>
 			) : null}
 
-			{theme.isEditForm ? (
+			{theme.isEditForm && theme.isDetailsView ? (
 				<ThemeEditForm theme={theme} onEditTheme={onEditTheme} />
 			) : null}
 

@@ -13,7 +13,8 @@ function ColorThemeList({
 	onToggleDetailsView,
 	onDeleteTheme,
 	onToggleEditForm,
-	onEditTheme,
+    onEditTheme,
+    onOpenTestPage
 }) {
 	return (
 		<ul>
@@ -36,7 +37,8 @@ function ColorThemeList({
 						theme={theme}
 						onDeleteTheme={onDeleteTheme}
 						onToggleEditForm={onToggleEditForm}
-						onEditTheme={onEditTheme}
+                        onEditTheme={onEditTheme}
+                        onOpenTestPage={onOpenTestPage}
 					/>
 				</li>
 			))}

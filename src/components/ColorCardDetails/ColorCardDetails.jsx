@@ -11,7 +11,7 @@ import './ColorCardDetails.css';
 |
 | Fetching Color-Names according to hex-values
 | - fetching as a site effect
-| - handle as a state-variable (colorName) 
+| - handle as a state-variable (colorName)
 | - rendering as a view component
 */
 function ColorCardDetails({ color }) {
