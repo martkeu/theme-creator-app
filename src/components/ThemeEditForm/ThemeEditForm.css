@@ -34,6 +34,12 @@
   flex-direction: row;
   gap: 8px;
 }
+
+/* input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+} */
+
 .theme-form__field > div input {
     display: inline-block;
     width: 48px;
