@@ -10,11 +10,18 @@ import TryButton from './components/TryButton/TryButton.jsx';
 import ThemeTestPage from './components/ThemeTestPage/ThemeTestPage.jsx';
 
 function App() {
+	/*-----------------------------------------------------------------------------mk--
+    | State Setting
+    |----------------------------------------------------------------------------------
+    | - themes stores the color themes
+    | - page stores 
+    */
 	const [themes, setThemes] = useLocalStorageState('themes', {
 		defaultValue: initialThemes,
 	});
 
 	const [page, setPage] = useState(null);
+	const [testTheme, setTestTheme] = useState(null);
 
 	/*-----------------------------------------------------------------------------mk--
     | Show/Hide Color Details
@@ -102,30 +109,34 @@ function App() {
 	/*-----------------------------------------------------------------------------mk--
     | Show Test Page
     |----------------------------------------------------------------------------------
-    | 
+    | - Select the Test page
+    | - Select and set the Theme chosen by the user
     */
-	function handleShowTestPage() {
-		//console.log('Test Page opened');
+	function handleShowTestPage(id) {
+		// console.log('Test Page opened'); console.log(id);
 		setPage('test');
-    }
-    
-    /*-----------------------------------------------------------------------------mk--
+
+		setTestTheme(themes.find((theme) => theme.id === id));
+	}
+
+	/*-----------------------------------------------------------------------------mk--
     | Close Test Page
     |----------------------------------------------------------------------------------
     | 
     */
 	function handleCloseTestPage() {
 		//console.log('Test Page closed');
-        setPage(null);
+		setPage(null);
 	}
 
 
 	return page === 'test' ? (
 		<>
-			<ThemeTestPage themes={themes} handleCloseTestPage={handleCloseTestPage} />
-			{/* <Header /> */}
-			TestPage - {themes[1].name}
 			{/* <button onClick={() => setPage(null)}>Back</button> */}
+			<ThemeTestPage
+				testTheme={testTheme}
+				handleCloseTestPage={handleCloseTestPage}
+			/>
 		</>
 	) : (
 		<>

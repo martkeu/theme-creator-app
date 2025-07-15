@@ -3,7 +3,7 @@ import './TryButton.css';
 
 function TryButton({theme, onOpenTestPage, children}) {
 	return (
-		<button onClick={() => onOpenTestPage()}>
+		<button onClick={() => onOpenTestPage(theme.id)}>
             {children} 
 		</button>
 	);

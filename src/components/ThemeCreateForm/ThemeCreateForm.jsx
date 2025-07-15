@@ -80,7 +80,7 @@ function ThemeCreateForm({ onAddTheme }) {
 
 				<div className="theme-form__button-wrapper">
 					{/* <Button type="submit">Create</Button> */}
-					<button type="submit">Create new Theme</button>
+					<button type="submit">Create Theme</button>
 				</div>
 			</div>
 		</form>

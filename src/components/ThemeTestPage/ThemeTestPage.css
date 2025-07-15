@@ -9,3 +9,24 @@
   font-weight: bold;
   text-align: center;
 }
+
+.test__highlightbox {
+    padding: 60px;
+    max-width: 60%;
+    text-align: center;
+    margin: 3rem auto;
+}
+
+.test__colorvalues {
+    width: 70%;
+    padding: 10px 20px;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+}
+
+.css-var-test {
+    background-color: var(--primary);
+    padding: 0.5rem;
+    margin-top: 2rem;
+}

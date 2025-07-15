@@ -2,6 +2,7 @@
 // import { IconChevronUp } from '@tabler/icons-react';
 import './EditButton.css';
 
+//theme.id --> handleShowTestPage --> select Theme
 function EditButton({theme, children, onToggleEditForm}) {
 	return (
 		<button onClick={() => onToggleEditForm(theme.id)}>
