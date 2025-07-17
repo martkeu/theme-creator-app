@@ -9,7 +9,17 @@ function ThemeCreateForm({ onAddTheme }) {
 
 		console.log(data);
 
-		onAddTheme(data);
+		const newThemeData = {
+			name: data.title,
+			colors: [
+				{ role: 'primary', value: data.color1 },
+				{ role: 'secondary', value: data.color2 },
+				{ role: 'surface', value: data.color3 },
+				{ role: 'surface-on', value: data.color4 },
+			],
+		};
+
+		onAddTheme(newThemeData);
 
 		event.target.reset();
 		event.target.elements.title.focus();
@@ -17,18 +27,18 @@ function ThemeCreateForm({ onAddTheme }) {
 
 	return (
 		<form className="theme-form" onSubmit={handleSubmit}>
-			<h2 className="theme-form__title">Create a new Color-Theme</h2>
+			<h2 className="theme-form__title">New Color-Theme</h2>
 
 			<div className="theme-form__fields">
 				<div className="theme-form__field">
 					<label htmlFor="title" className="theme-form__label">
-						Theme-Name
+						Name
 					</label>
-					<input type="text" name="title" id="title" autofocus required />
+					<input type="text" name="title" id="title" autoFocus required />
 				</div>
 
 				<div className="theme-form__field">
-					<label htmlFor="colors">Theme-Colors</label>
+					<label htmlFor="colors">Colors</label>
 
 					<div className="theme-form__colors">
 						<span>
