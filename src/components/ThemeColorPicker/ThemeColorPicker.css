@@ -1,0 +1,47 @@
+.picker__color-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media screen and (min-width: 600px) {
+    .picker__color-card {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.picker__color-card > span {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.picker__color-card > span span {
+    text-align: left;
+}
+
+.picker__color-card input[type="text"] {
+    color: white;
+    padding: 0 1rem; 
+    letter-spacing: 2px;
+
+    width: 100%;
+    max-width: 100%;
+    background-color: transparent;
+    background-color: rgb(25, 50, 90);
+    border: 1px solid #1c51db;
+    border-radius: 0;
+    font-size: 1rem;
+}
+.picker__color-card input[type="color"] {
+    aspect-ratio: 1;
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    border: none;
+}
+
+#title {
+    background-color: rgb(25, 50, 90);
+    border: 1px solid #1c51db;
+    color: rgb(253, 253, 253);
+}
