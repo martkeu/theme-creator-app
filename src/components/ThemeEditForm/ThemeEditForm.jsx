@@ -9,7 +9,17 @@ export default function ThemeEditForm({ theme, onEditTheme }) {
 
 		console.log(data, theme.id);
 
-		onEditTheme({ ...data, id: theme.id });
+		const newThemeData = {
+			name: data.title,
+			colors: [
+				{ role: 'primary', value: data.color1 },
+				{ role: 'secondary', value: data.color2 },
+				{ role: 'surface', value: data.color3 },
+				{ role: 'surface-on', value: data.color4 },
+			],
+		};
+
+		onEditTheme({ ...newThemeData, id: theme.id });
 
 		event.target.reset();
 		event.target.elements.title.focus();
@@ -48,7 +58,7 @@ export default function ThemeEditForm({ theme, onEditTheme }) {
 						</div>
 						<div>
 							<label htmlFor="color2" className="screen-reader-only">
-								Color 1
+								Color 2
 							</label>
 							<input
 								type="color"
@@ -59,7 +69,7 @@ export default function ThemeEditForm({ theme, onEditTheme }) {
 						</div>
 						<div>
 							<label htmlFor="color3" className="screen-reader-only">
-								Color 1
+								Color 3
 							</label>
 							<input
 								type="color"
@@ -70,7 +80,7 @@ export default function ThemeEditForm({ theme, onEditTheme }) {
 						</div>
 						<div>
 							<label htmlFor="color4" className="screen-reader-only">
-								Color 1
+								Color 4
 							</label>
 							<input
 								type="color"
