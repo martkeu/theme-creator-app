@@ -3,7 +3,7 @@
 import './EditButton.css';
 
 //theme.id --> handleShowTestPage --> select Theme
-function EditButton({theme, children, onToggleEditForm}) {
+function EditButton({theme, onToggleEditForm, children}) {
 	return (
 		<button onClick={() => onToggleEditForm(theme.id)}>
 			{children}

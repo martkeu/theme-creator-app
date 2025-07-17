@@ -4,5 +4,11 @@
     justify-content: center;
     align-items: center;
     background-color: #3978e5;
+    background-color: transparent;
+    /* outline: auto; */
     color: white;
+}
+
+.details-button:hover {
+    /* border: none; */
 }

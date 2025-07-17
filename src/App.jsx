@@ -1,25 +1,25 @@
 import { initialThemes } from './db.js';
-import { useState } from 'react';
 import useLocalStorageState from 'use-local-storage-state';
+import { useState } from 'react';
 import { uid } from 'uid';
-import ColorThemeList from './components/ColorThemeList/ColorThemeList.jsx';
-import ThemeForm from './components/ThemeCreateForm/ThemeCreateForm.jsx';
-import './App.css';
 import Header from './components/Header/Header.jsx';
-import TryButton from './components/TryButton/TryButton.jsx';
+import ColorThemeList from './components/ColorThemeList/ColorThemeList.jsx';
+import ThemeCreateForm from './components/ThemeCreateForm/ThemeCreateForm.jsx';
 import ThemeTestPage from './components/ThemeTestPage/ThemeTestPage.jsx';
+import ThemeColorPicker from './components/ThemeColorPicker/ThemeColorPicker.jsx';
+import './App.css';
 
 function App() {
 	/*-----------------------------------------------------------------------------mk--
     | State Setting
     |----------------------------------------------------------------------------------
-    | - themes stores the color themes
-    | - page stores 
+    | - themes: stores the color themes
+    | - page: stores the current Page (ThemePage respectively TestPage)
+    | - testTheme: identifys theme-selection by users to display on TestPage
     */
 	const [themes, setThemes] = useLocalStorageState('themes', {
 		defaultValue: initialThemes,
 	});
-
 	const [page, setPage] = useState(null);
 	const [testTheme, setTestTheme] = useState(null);
 
@@ -39,37 +39,6 @@ function App() {
 	}
 
 	/*-----------------------------------------------------------------------------mk--
-    | Create Theme
-    |----------------------------------------------------------------------------------
-    | 
-    */
-	function handleAddTheme(newTheme) {
-		setThemes([
-			{
-				id: uid(),
-				name: newTheme.title,
-				colors: [
-					{ role: 'primary', value: newTheme.color1 },
-					{ role: 'secondary', value: newTheme.color2 },
-					{ role: 'surface', value: newTheme.color3 },
-					{ role: 'surface-on', value: newTheme.color4 },
-				],
-			},
-			...themes,
-		]);
-	}
-
-	/*-----------------------------------------------------------------------------mk--
-    | Delete Theme
-    |----------------------------------------------------------------------------------
-    | 
-    */
-	function handleDeleteTheme(id) {
-		// console.log('deleted:', id);
-		setThemes(themes.filter((theme) => theme.id !== id));
-	}
-
-	/*-----------------------------------------------------------------------------mk--
     | Show/Hide Edit Form
     |----------------------------------------------------------------------------------
     | 
@@ -83,6 +52,38 @@ function App() {
 	}
 
 	/*-----------------------------------------------------------------------------mk--
+    | Create Theme
+    |----------------------------------------------------------------------------------
+    | 
+    */
+	function handleAddTheme(newThemeData) {
+		//console.log(newThemeData);
+		setThemes([{ id: uid(), ...newThemeData }, ...themes]);
+	}
+
+	async function handleAddTheme2(newThemeData) {
+		const promises = newThemeData.colors.map(async (color) => {
+			console.log('xxx: ', color);
+			const colorSineHashSign = color.value.slice(1);
+
+			const url = `https://www.thecolorapi.com/id?hex=${colorSineHashSign}`;
+
+			const resp = await fetch(url);
+			const data = await resp.json();
+
+			return {
+				...color,
+				name: data.name.value,
+			};
+		});
+
+        const newColorsAndNames = await Promise.all(promises);
+        
+		// console.log('colorsAndNames: ', newColorsAndNames);
+        setThemes([{ id: uid(), ...newThemeData, colors: newColorsAndNames }, ...themes]);
+	}
+
+	/*-----------------------------------------------------------------------------mk--
     | Update Theme
     |----------------------------------------------------------------------------------
     | 
@@ -91,19 +92,44 @@ function App() {
 		// console.log('edit:', updatedTheme);
 		setThemes(
 			themes.map((theme) =>
-				theme.id === updatedTheme.id
-					? {
-							name: updatedTheme.title,
-							colors: [
-								{ role: 'primary', value: updatedTheme.color1 },
-								{ role: 'secondary', value: updatedTheme.color2 },
-								{ role: 'surface', value: updatedTheme.color3 },
-								{ role: 'surface-on', value: updatedTheme.color4 },
-							],
-					  }
-					: theme
+				theme.id === updatedTheme.id ? updatedTheme : theme
 			)
 		);
+    }
+    
+    async function handleEditTheme2(updatedTheme) {
+		const promises = updatedTheme.colors.map(async (color) => {
+			const colorSineHashSign = color.value.slice(1);
+
+			const url = `https://www.thecolorapi.com/id?hex=${colorSineHashSign}`;
+
+			const resp = await fetch(url);
+			const data = await resp.json();
+
+			return {
+				...color,
+				name: data.name.value,
+			};
+		});
+
+        const newColorsAndNames = await Promise.all(promises);
+        
+		// console.log('colorsAndNames: ', newColorsAndNames);
+        setThemes(
+			themes.map((theme) =>
+				theme.id === updatedTheme.id ? {...updatedTheme, colors: newColorsAndNames} : theme
+			)
+		);
+	}
+
+	/*-----------------------------------------------------------------------------mk--
+    | Delete Theme
+    |----------------------------------------------------------------------------------
+    | 
+    */
+	function handleDeleteTheme(id) {
+		// console.log('deleted:', id);
+		setThemes(themes.filter((theme) => theme.id !== id));
 	}
 
 	/*-----------------------------------------------------------------------------mk--
@@ -113,7 +139,7 @@ function App() {
     | - Select and set the Theme chosen by the user
     */
 	function handleShowTestPage(id) {
-		// console.log('Test Page opened'); console.log(id);
+		// console.log('Test Page opened - Theme:', id);
 		setPage('test');
 
 		setTestTheme(themes.find((theme) => theme.id === id));
@@ -125,7 +151,7 @@ function App() {
     | 
     */
 	function handleCloseTestPage() {
-		//console.log('Test Page closed');
+		// console.log('Test Page closed');
 		setPage(null);
 	}
 
@@ -142,14 +168,16 @@ function App() {
 		<>
 			<Header />
 
-			<ThemeForm onAddTheme={handleAddTheme} />
+			{/* <ThemeCreateForm onAddTheme={handleAddTheme} /> */}
+
+			<ThemeColorPicker onAddTheme={handleAddTheme2} />
 
 			<ColorThemeList
 				themes={themes}
 				onToggleDetailsView={toggleDetailsView}
 				onToggleEditForm={toggleEditForm}
 				onDeleteTheme={handleDeleteTheme}
-				onEditTheme={handleEditTheme}
+				onEditTheme={handleEditTheme2}
 				onOpenTestPage={handleShowTestPage}
 			/>
 		</>

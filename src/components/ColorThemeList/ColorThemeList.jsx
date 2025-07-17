@@ -13,32 +13,30 @@ function ColorThemeList({
 	onToggleDetailsView,
 	onDeleteTheme,
 	onToggleEditForm,
-    onEditTheme,
-    onOpenTestPage
+	onEditTheme,
+	onOpenTestPage,
 }) {
 	return (
 		<ul>
 			{themes.map((theme) => (
 				<li key={theme.id}>
-					<h2>
-						<div>{theme.name}</div>
+					<div className="theme__heading">
+						<h2>{theme.name}</h2>
 
 						<DetailsButton
 							theme={theme}
 							onToggleDetailsView={onToggleDetailsView}
 						/>
 
-						{/* <DeleteButton theme={theme} onDeleteTheme={onDeleteTheme}>
-							X
-						</DeleteButton> */}
-					</h2>
+						{/* <DeleteButton theme={theme} onDeleteTheme={onDeleteTheme}>X</DeleteButton> */}
+					</div>
 
 					<ColorTheme
 						theme={theme}
 						onDeleteTheme={onDeleteTheme}
 						onToggleEditForm={onToggleEditForm}
-                        onEditTheme={onEditTheme}
-                        onOpenTestPage={onOpenTestPage}
+						onEditTheme={onEditTheme}
+						onOpenTestPage={onOpenTestPage}
 					/>
 				</li>
 			))}

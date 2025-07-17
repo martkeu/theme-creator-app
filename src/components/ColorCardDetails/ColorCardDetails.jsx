@@ -12,32 +12,32 @@ import './ColorCardDetails.css';
 | Fetching Color-Names according to hex-values
 | - fetching as a site effect
 | - handle as a state-variable (colorName)
-| - rendering as a view component
+| - rendering as a view component (change color.name to colorName)
 */
 function ColorCardDetails({ color }) {
-    const [colorName, setColorName] = useState('');
+	// const [colorName, setColorName] = useState('');
 
-    const colorSineHashSign = color.value.slice(1);
-    
-    const url = `https://www.thecolorapi.com/id?hex=${colorSineHashSign}`;
+	// const colorSineHashSign = color.value.slice(1);
 
-	useEffect(() => {
-		async function fetchData() {
-			const resp = await fetch(url);
-            const data = await resp.json();
-            
-            console.log(data.name.value);
+	// const url = `https://www.thecolorapi.com/id?hex=${colorSineHashSign}`;
 
-            setColorName(data.name.value);
-        }
-        
-        fetchData()
-	}, [url]);
+	// useEffect(() => {
+	// 	async function fetchData() {
+	// 		const resp = await fetch(url);
+	// 		const data = await resp.json();
+
+	// 		console.log(data.name.value);
+
+	// 		setColorName(data.name.value);
+	// 	}
+
+	// 	fetchData();
+	// }, [url]);
 
 	return (
 		<article className="color-card">
 			<div className="color-card__info">
-				<p className="color-card__name">{colorName}</p>
+				<p className="color-card__name">{color.name}</p>
 				<p className="color-card__role">{color.role}</p>
 				<p className="color-card__hex">{color.value}</p>
 			</div>

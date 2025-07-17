@@ -35,7 +35,7 @@ function ThemeTestPage({ testTheme, handleCloseTestPage }) {
 				className="css-var-test"
 				style={{ '--primary': testTheme.colors[0].value }}
 			>
-				Test CSS-Variable
+				Don't forget to test CSS-Variables!
 			</p>
 
 			<div
@@ -54,7 +54,7 @@ function ThemeTestPage({ testTheme, handleCloseTestPage }) {
 			))}
 
 			<footer style={{ color: testTheme.colors[0].value }}>
-				Copyright &copy; {testTheme.id}
+				&copy; 2025 &bull; by mk
 			</footer>
 		</>
 	);
