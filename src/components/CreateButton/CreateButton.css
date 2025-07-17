@@ -1,4 +1,4 @@
-button {
+.create-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,13 +6,11 @@ button {
     color: white;
     transition: transform 0.2s ease-in-out;
 
+    padding-inline: 2rem;
+    margin-left: auto;
 }
 
 button:hover {
     /* background-color: #125ee1; */
     transform: scale(1.05);
-}
-
-.deleteBtn {
-    background-color: rgb(131, 16, 16);
 }

@@ -3,7 +3,7 @@ import './ThemeTestPage.css';
 function ThemeTestPage({ testTheme, handleCloseTestPage }) {
 	return (
 		<>
-			<button onClick={() => handleCloseTestPage()}>Close Preview</button>
+			<button className="closeBtn" onClick={() => handleCloseTestPage()}>Close Preview</button>
 
 			<header className="header">
 				<h1

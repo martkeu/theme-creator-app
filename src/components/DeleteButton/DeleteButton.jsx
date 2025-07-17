@@ -4,7 +4,7 @@ import './DeleteButton.css';
 
 function DeleteButton({theme, onDeleteTheme, children}) {
 	return (
-		<button onClick={() => onDeleteTheme(theme.id)}>
+		<button className="deleteBtn" onClick={() => onDeleteTheme(theme.id)}>
 			{children}
 		</button>
 	);

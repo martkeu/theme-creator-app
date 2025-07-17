@@ -7,6 +7,7 @@ import ColorThemeList from './components/ColorThemeList/ColorThemeList.jsx';
 import ThemeCreateForm from './components/ThemeCreateForm/ThemeCreateForm.jsx';
 import ThemeTestPage from './components/ThemeTestPage/ThemeTestPage.jsx';
 import ThemeColorPicker from './components/ThemeColorPicker/ThemeColorPicker.jsx';
+import CreateButton from './components/CreateButton/CreateButton.jsx';
 import './App.css';
 
 function App() {
@@ -18,10 +19,20 @@ function App() {
     | - testTheme: identifys theme-selection by users to display on TestPage
     */
 	const [themes, setThemes] = useLocalStorageState('themes', {
-		defaultValue: initialThemes,
+		defaultValue: [],
 	});
 	const [page, setPage] = useState(null);
 	const [testTheme, setTestTheme] = useState(null);
+	const [isCreateView, setIsCreateView] = useState(false);
+
+	/*-----------------------------------------------------------------------------mk--
+    | Show/Hide Color-Theme Create Form
+    |----------------------------------------------------------------------------------
+    | 
+    */
+	function toggleCreateView() {
+		setIsCreateView(!isCreateView);
+	}
 
 	/*-----------------------------------------------------------------------------mk--
     | Show/Hide Color Details
@@ -77,10 +88,13 @@ function App() {
 			};
 		});
 
-        const newColorsAndNames = await Promise.all(promises);
-        
+		const newColorsAndNames = await Promise.all(promises);
+
 		// console.log('colorsAndNames: ', newColorsAndNames);
-        setThemes([{ id: uid(), ...newThemeData, colors: newColorsAndNames }, ...themes]);
+		setThemes([
+			{ id: uid(), ...newThemeData, colors: newColorsAndNames },
+			...themes,
+		]);
 	}
 
 	/*-----------------------------------------------------------------------------mk--
@@ -91,13 +105,11 @@ function App() {
 	function handleEditTheme(updatedTheme) {
 		// console.log('edit:', updatedTheme);
 		setThemes(
-			themes.map((theme) =>
-				theme.id === updatedTheme.id ? updatedTheme : theme
-			)
+			themes.map((theme) => (theme.id === updatedTheme.id ? updatedTheme : theme))
 		);
-    }
-    
-    async function handleEditTheme2(updatedTheme) {
+	}
+
+	async function handleEditTheme2(updatedTheme) {
 		const promises = updatedTheme.colors.map(async (color) => {
 			const colorSineHashSign = color.value.slice(1);
 
@@ -112,12 +124,14 @@ function App() {
 			};
 		});
 
-        const newColorsAndNames = await Promise.all(promises);
-        
+		const newColorsAndNames = await Promise.all(promises);
+
 		// console.log('colorsAndNames: ', newColorsAndNames);
-        setThemes(
+		setThemes(
 			themes.map((theme) =>
-				theme.id === updatedTheme.id ? {...updatedTheme, colors: newColorsAndNames} : theme
+				theme.id === updatedTheme.id
+					? { ...updatedTheme, colors: newColorsAndNames }
+					: theme
 			)
 		);
 	}
@@ -155,7 +169,6 @@ function App() {
 		setPage(null);
 	}
 
-
 	return page === 'test' ? (
 		<>
 			{/* <button onClick={() => setPage(null)}>Back</button> */}
@@ -168,9 +181,17 @@ function App() {
 		<>
 			<Header />
 
+			<CreateButton
+				isCreateView={isCreateView}
+				onToggleCreateView={toggleCreateView}
+			/>
+
 			{/* <ThemeCreateForm onAddTheme={handleAddTheme} /> */}
 
-			<ThemeColorPicker onAddTheme={handleAddTheme2} />
+			<ThemeColorPicker
+				isCreateView={isCreateView}
+				onAddTheme={handleAddTheme2}
+			/>
 
 			<ColorThemeList
 				themes={themes}
